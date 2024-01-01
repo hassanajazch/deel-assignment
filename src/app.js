@@ -10,12 +10,12 @@ app.set('models', sequelize.models)
 // routes import
 const contractRoutes = require( './routes/contract');
 const jobRoutes = require( './routes/job');
-// const profileRoutes = require( './routes/profile');
-// const adminRoutes = require( './routes/admin');
+const profileRoutes = require( './routes/profile');
+const adminRoutes = require( './routes/admin');
 
 app.use('/contracts', contractRoutes);
 app.use('/jobs', jobRoutes);
-// app.use('/balances', profileRoutes);
-// app.use('/admin', adminRoutes);
+app.use('/balances', profileRoutes);
+app.use('/admin', adminRoutes);
 
 module.exports = app;

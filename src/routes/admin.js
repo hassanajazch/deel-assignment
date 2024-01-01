@@ -1,8 +1,8 @@
-// const express = require('express');
-// const { getBestProfession } = require('../controller/admin');
+const express = require('express');
+const { getHighestEarningProfession } = require('../controller/admin');
 
-// const contractRouter = express.Router();
+const adminRouter = express.Router();
 
-// contractRouter.get('/best-profession', getBestProfession);
+adminRouter.get('/best-profession', getHighestEarningProfession);
 
-// module.exports = contractRouter;
+module.exports = adminRouter;

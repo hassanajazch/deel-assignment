@@ -1,6 +1,11 @@
 const { Op } = require('sequelize');
 const { StatusCodes } = require('http-status-codes');
-const { UNEXPECTED_ERR_MESSAGE } = require('../constants/constants');
+const { 
+  UNEXPECTED_ERR_MESSAGE, 
+  PAYMENT_TRANSAFERED_MESSAGE_SUCCESS, 
+  NO_BALANCE,
+  PAYMENT_TRANSAFERED_MESSAGE_FAILURE
+ } = require('../constants/constants');
 
 const getUnpaidJobs = async (req, res) => {
     try {
@@ -76,20 +81,20 @@ const payJobContractor = async (req, res) => {
                   Job.update(
                     { paid: 1 },
                     { where: { id: jobId } },
-                    { transaction: clientPaymentTrasc },
+                    { transaction: clientPaymentTrasc }, // payment date should also be updated
                   ),
                 ]);
       
                 await clientPaymentTrasc.commit();
       
-                return res.status(StatusCodes.OK).json({msg: 'Payment has been transfered successfully'});
+                return res.status(StatusCodes.OK).json({msg: PAYMENT_TRANSAFERED_MESSAGE_SUCCESS});
             } catch (error) {
                 await clientPaymentTrasc.rollback();
       
-                return res.status(StatusCodes.CONFLICT).json({msg: 'Unable to proocess the complete the payment process'});
+                return res.status(StatusCodes.CONFLICT).json({msg: PAYMENT_TRANSAFERED_MESSAGE_FAILURE});
             }
         } else {
-            return res.status(StatusCodes.CONFLICT).json({msg: 'Client does not have enough balance to pay for this job'});
+            return res.status(StatusCodes.CONFLICT).json({msg: NO_BALANCE});
         }
     } else {
         return res.status(StatusCodes.NOT_FOUND).json({msg: 'No Unpaid job found for this ID'});

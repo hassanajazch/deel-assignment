@@ -1,9 +1,9 @@
-// const express = require('express');
+const express = require('express');
 
-// const { deposit } = require('../controller/profile');
+const { depositBalance } = require('../controller/profile');
 
-// const profileRoutes = express.Router();
+const profileRoutes = express.Router();
 
-// profileRoutes.post('/deposit/:userId', deposit);
+profileRoutes.post('/deposit/:userId', depositBalance);
 
-// module.exports = profileRoutes;
+module.exports = profileRoutes;
