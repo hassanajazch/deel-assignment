@@ -2,7 +2,6 @@
 
 💫 Welcome! 🎉
 
-This backend exercise involves building a Node.js/Express.js app that will serve a REST API. We imagine you should spend around 3 hours at implement this feature.
 
 ## Project Structure & Approach
 - I have organized controller, routes, constants in separater folder for imporved structure.
